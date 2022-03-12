@@ -1,0 +1,23 @@
+{
+  "navbar": {
+    "pages": {},
+    "login": "Log in",
+    "register": "Sign up",
+    "lang": "Lang"
+  },
+  "pages": {
+    "register": {
+      "title": "Registration",
+      "buttonSubmit": "Sign up"
+    }
+  },
+  "inputs": {
+    "login": "login",
+    "email": "email",
+    "password": "password",
+    "confirmPassword": "confirm password"
+  },
+  "message": {
+
+  }
+}

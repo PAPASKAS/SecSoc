@@ -1,0 +1,20 @@
+{
+    "navbar": {
+        "pages": {},
+        "login": "Вход",
+        "register": "Регистрация",
+        "lang": "Язык"
+    },
+    "pages": {
+        "register": {
+            "title": "Регистрация",
+            "buttonSubmit": "Зарегистрироваться"
+        }
+    },
+    "inputs": {
+        "login": "логин",
+        "email": "почта",
+        "password": "пароль",
+        "confirmPassword": "повторите пароль"
+    }
+}
