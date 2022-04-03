@@ -1,0 +1,35 @@
+{
+  "locale": "en",
+  "navbar": {
+    "login": "Log in",
+    "register": "Sign up",
+    "lang": "Lang"
+  },
+  "pages": {
+    "register": {
+      "title": "Registration",
+      "buttonSubmit": "Sign up"
+    }
+  },
+  "inputs": {
+    "login": "login",
+    "email": "email",
+    "password": "password",
+    "confirmPassword": "confirm password"
+  },
+  "notification": {
+    "password": {
+      "oneNumber": "Need one number",
+      "oneLowercaseLetter": "Need one lowercase letter",
+      "oneUppercaseLetter": "Need one uppercase letter",
+      "minLength": "Minimum password length 8 characters",
+      "maxLength": "Maximum password length 32 characters",
+      "withoutSpaces": "Password must not contain spaces",
+      "differentPassword": "Different password"
+    },
+    "success": "Success!",
+    "errors": {
+      "serverError": "Iternal server error!"
+    }
+  }
+}

@@ -1,0 +1,35 @@
+{
+    "locale": "ru",
+    "navbar": {
+        "login": "Вход",
+        "register": "Регистрация",
+        "lang": "Язык"
+    },
+    "pages": {
+        "register": {
+            "title": "Регистрация",
+            "buttonSubmit": "Зарегистрироваться"
+        }
+    },
+    "inputs": {
+        "login": "логин",
+        "email": "почта",
+        "password": "пароль",
+        "confirmPassword": "повторите пароль"
+    },
+    "notification": {
+        "password": {
+            "oneNumber": "Нужна хотя бы одна цифра",
+            "oneLowercaseLetter": "Нужна хотя бы одна строчная буква",
+            "oneUppercaseLetter": "Нужна хотя бы одна заглавная буква",
+            "minLength": "Минимальная длина пароля 8 символов",
+            "maxLength": "Максимальная длина пароля 32 символа",
+            "withoutSpaces": "Пароль не должен содержать пробелов",
+            "differentPassword": "Пароли отличаются"
+        },
+        "success": "Успешно!",
+        "errors": {
+            "serverError": "Непредвиденная ошибка сервера!"
+        }
+    }
+}

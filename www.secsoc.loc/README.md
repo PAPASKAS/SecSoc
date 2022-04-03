@@ -1,9 +1,10 @@
-<h2>ОБЩЕЕ</h2>
+# ОБЩЕЕ
 
-<h2>МАРШРУТИЗАЦИЯ</h2>
-<ul>
-    <li>В качестве имен для марширутов используется имена маршрутов как в ресурсных контролерах laravel</li>
-</ul>
+1. Каждый запрос на сервер должен содержать поле  c именем текущей локали, если ожидает локализированный ответ
+
+# МАРШРУТИЗАЦИЯ
+
+1. В качестве имен для марширутов используется имена маршрутов как в ресурсных контролерах laravel
 
 <table>
     <tr>
@@ -12,12 +13,12 @@
         <th>ACTION</th>
     </tr>
     <tr>
-        <th>GET</th>
+        <th>POST</th>
         <th>/photos</th>
         <th>index</th>
     </tr>
     <tr>
-        <th>GET</th>
+        <th>POST</th>
         <th>/photos/create</th>
         <th>create</th>
     </tr>
@@ -27,12 +28,12 @@
         <th>store</th>
     </tr>
     <tr>
-        <th>GET</th>
+        <th>POST</th>
         <th>/photos/[id]</th>
         <th>show</th>
     </tr>
     <tr>
-        <th>GET</th>
+        <th>POST</th>
         <th>/photos/[id]/edit</th>
         <th>edit</th>
     </tr>

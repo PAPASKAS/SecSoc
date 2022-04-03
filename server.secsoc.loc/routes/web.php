@@ -13,13 +13,4 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::post('/api/one', function () {
-   return "asd";
-});
-Route::get('/api/one', function () {
-    return csrf_token();
-});
+require __DIR__ . '/auth.php';
