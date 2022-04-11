@@ -12,11 +12,13 @@ import LanguageButton from "@/components/LanguageButton"
 import { useRouter } from "next/router"
 import * as en from "@/locales/en.json"
 import * as ru from "@/locales/ru.json"
+import {useAuth} from "@/hooks/auth";
 
 
 const Header = () => {
     const router = useRouter();
     const locale = router.locale === "en" ? en : ru;
+    const {user} = useAuth({});
 
     return (
         <Navbar bg="dark" variant={'dark'} expand="lg" className={'mb-4'}>
@@ -32,25 +34,23 @@ const Header = () => {
                         </Link>
                     </Nav>
                     <Nav className={'align-items-start align-items-lg-center'}>
-                        <Link href={"/login"} passHref>
-                            <Nav.Link>
-                                <Button variant={'contained'}>{locale.navbar.login}</Button>
-                            </Nav.Link>
-                        </Link>
-                        <Link href={"/register"} passHref>
-                            <Nav.Link>
-                                <Button variant={'contained'}>{locale.navbar.register}</Button>
-                            </Nav.Link>
-                        </Link>
+                        { !user ?
+                            <>
+                                <Link href={"/login"} passHref>
+                                    <Nav.Link>
+                                        <Button variant={'contained'}>{locale.navbar.login}</Button>
+                                    </Nav.Link>
+                                </Link>
+                                <Link href={"/register"} passHref>
+                                    <Nav.Link>
+                                        <Button variant={'contained'}>{locale.navbar.register}</Button>
+                                    </Nav.Link>
+                                </Link>
+                            </>
+                        :
+                            null
+                        }
                         <LanguageButton locale={locale} router={router} />
-                        {/* <NavDropdown title={locale.navbar.lang} className={'dropstart'}>
-                            <Link href={router.asPath} locale={'ru'} passHref>
-                                <NavDropdown.Item>ru</NavDropdown.Item>
-                            </Link>
-                            <Link href={router.asPath} locale={'en'} passHref>
-                                <NavDropdown.Item>en</NavDropdown.Item>
-                            </Link>
-                        </NavDropdown> */}
                     </Nav>
                 </Navbar.Collapse>
             </Container>

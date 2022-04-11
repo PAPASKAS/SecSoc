@@ -9,27 +9,24 @@
     "register": {
       "title": "Registration",
       "buttonSubmit": "Sign up"
+    },
+    "login": {
+      "title": "Log in",
+      "buttonSubmit": "Log in"
     }
   },
   "inputs": {
     "login": "login",
     "email": "email",
     "password": "password",
-    "confirmPassword": "confirm password"
+    "password_confirmation": "confirm password",
+    "rememberMe": "remember me"
   },
   "notification": {
-    "password": {
-      "oneNumber": "Need one number",
-      "oneLowercaseLetter": "Need one lowercase letter",
-      "oneUppercaseLetter": "Need one uppercase letter",
-      "minLength": "Minimum password length 8 characters",
-      "maxLength": "Maximum password length 32 characters",
-      "withoutSpaces": "Password must not contain spaces",
-      "differentPassword": "Different password"
-    },
     "success": "Success!",
     "errors": {
-      "serverError": "Iternal server error!"
+      "differentPassword": "Different password",
+      "serverError": "Internal server error!"
     }
   }
 }

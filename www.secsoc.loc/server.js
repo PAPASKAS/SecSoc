@@ -10,8 +10,9 @@ const app = next({ dev, hostname, port })
 const handle = app.getRequestHandler()
 
 const options = {
-    pfx: fs.readFileSync(__dirname + '/cert/server.pfx'),
-    passphrase: 'nC@U-T!gm23_C5_6',
+    ca: fs.readFileSync(__dirname + '/cert/ca.crt', 'utf8'),
+    key: fs.readFileSync(__dirname + '/cert/server.key', 'utf8'),
+    cert: fs.readFileSync(__dirname + '/cert/server.crt', 'utf8'),
 }
 
 app.prepare().then(() => {

@@ -2,11 +2,19 @@ import {
     NavDropdown
 } from "react-bootstrap"
 import Link from "next/link"
+import ILocale from "@/interfaces/locale";
+import {NextRouter} from "next/router";
 
 
-const LanguageButton = (locale: any, router: any) => {
-    const locales = locale.locale;
-    const asPath = locale.router.asPath;
+interface IProps {
+    locale: ILocale;
+    router: NextRouter;
+}
+
+
+const LanguageButton = (props: IProps) => {
+    const locales = props.locale;
+    const asPath = props.router.asPath;
 
     const changeCookie = (lang: string) => {
         document.cookie = `lang=${lang}; path=/; domain=.${process.env.NEXT_PUBLIC_FRONTEND_DOMAIN}; secure`;
@@ -18,7 +26,7 @@ const LanguageButton = (locale: any, router: any) => {
                 <NavDropdown.Item onClick={() => changeCookie("ru")}>ru</NavDropdown.Item >
             </Link>
             <Link href={asPath} locale={'en'} passHref>
-                <NavDropdown.Item onClick={() => changeCookie("ru")}>en</NavDropdown.Item>
+                <NavDropdown.Item onClick={() => changeCookie("en")}>en</NavDropdown.Item>
             </Link>
         </NavDropdown >
     )

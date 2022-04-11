@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React from 'react'
+import noty from "@/lib/noty"
 import { useRouter } from 'next/router'
 import { useAuth } from '@/hooks/auth'
 import {
@@ -8,33 +9,44 @@ import {
 import PasswordInput from '@/components/PasswordInput'
 import * as en from "@/locales/en.json"
 import * as ru from "@/locales/ru.json"
+import ILocale from "@/interfaces/locale";
 
 
 const Register = () => {
-    const router = useRouter()
-    const locale = router.locale === "en" ? en : ru
-
     const { register } = useAuth({
         middleware: 'guest',
-        redirectTo: '/dashboard',
     })
 
-    const [name, setName] = useState('')
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-    const [password_confirmation, setPasswordConfirmation] = useState('')
-    const [errors, setErrors] = useState([])
+    const router = useRouter()
+    const locale: ILocale = router.locale === "en" ? en : ru
 
     const submitForm = (event: React.SyntheticEvent) => {
-        event.preventDefault()
+        event.preventDefault();
 
-        register({ name, email, password, password_confirmation, setErrors })
+        const target = event.target as typeof event.target & {
+            login: { value: string };
+            email: { value: string };
+            password: { value: string };
+            password_confirmation: { value: string };
+        };
+
+        const data = {
+            login: target.login.value.trim(),
+            email: target.email.value.trim(),
+            password: target.password.value.trim(),
+            password_confirmation: target.password_confirmation.value.trim(),
+        };
+
+        if (data.password !== data.password_confirmation)
+            noty(locale.notification.errors.differentPassword, "error", true);
+
+
+        register(data)
     }
 
     return (
         <>
-            {errors}
-            <form onSubmit={submitForm} className={'form-control gap-3 d-grid py-3'}>
+            <form onSubmit={submitForm} className={'form-control gap-3 d-grid py-3 w-100 w-md-75'}>
                 <legend>{locale.pages.register.title}</legend>
                 <TextField
                     id={'login'}
@@ -60,8 +72,8 @@ const Register = () => {
                     id={'password'}
                 />
                 <PasswordInput
-                    label={locale.inputs.confirmPassword}
-                    id={'confirmPassword'}
+                    label={locale.inputs.password_confirmation}
+                    id={'password_confirmation'}
                 />
                 <div>
                     <Button type={'submit'} variant={'contained'}>{locale.pages.register.buttonSubmit}</Button>

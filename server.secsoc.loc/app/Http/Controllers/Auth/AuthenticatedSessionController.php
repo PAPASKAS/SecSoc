@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\App;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -17,6 +18,14 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request)
     {
+        if (isset($_COOKIE['lang'])) {
+            $lang = $_COOKIE['lang'];
+        } else {
+            $lang = env("DEFAULT_LANG");
+        }
+
+        App::setLocale($lang);
+
         $request->authenticate();
 
         $request->session()->regenerate();

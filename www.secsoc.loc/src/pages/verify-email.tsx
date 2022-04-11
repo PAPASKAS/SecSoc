@@ -1,7 +1,3 @@
-import ApplicationLogo from '@/components/ApplicationLogo'
-import AuthCard from '@/components/AuthCard'
-import Button from '@/components/Button'
-import GuestLayout from '@/components/Layouts/GuestLayout'
 import Link from 'next/link'
 import { useAuth } from '@/hooks/auth'
 import { useState } from 'react'
@@ -14,15 +10,8 @@ const VerifyEmail = () => {
     const [status, setStatus] = useState(null)
 
     return (
-        <GuestLayout>
-            <AuthCard
-                logo={
-                    <Link href="/">
-                        <a>
-                            <ApplicationLogo className="w-20 h-20 fill-current text-gray-500" />
-                        </a>
-                    </Link>
-                }>
+        <>
+            <div>
 
                 <div className="mb-4 text-sm text-gray-600">
                     Thanks for signing up! Before getting started, could you
@@ -51,8 +40,8 @@ const VerifyEmail = () => {
                         Logout
                     </button>
                 </div>
-            </AuthCard>
-        </GuestLayout>
+            </div>
+        </>
     )
 }
 

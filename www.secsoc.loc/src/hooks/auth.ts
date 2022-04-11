@@ -2,16 +2,32 @@ import useSWR from 'swr'
 import axios from '@/lib/axios'
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
+import {defaultCatch} from "@/lib/shared"
+import * as en from "@/locales/en.json";
+import * as ru from "@/locales/ru.json";
+import ILocale from "@/interfaces/locale";
 
 
 interface IPropsAuth {
-    middleware?: 'guest' | 'auth' | 'verified';
+    middleware?: 'guest' | 'auth' | 'verified' | 'none';
     redirectTo?: string;
+}
+interface IRegister {
+    login: string;
+    email: string;
+    password: string;
+    password_confirmation: string;
+}
+interface ILogin {
+    email: string;
+    password: string;
+    remember: boolean;
 }
 
 
-export const useAuth = ({ middleware = 'auth', redirectTo = '/' }: IPropsAuth) => {
+export const useAuth = ({ middleware = 'none', redirectTo = '/' }: IPropsAuth) => {
     const router = useRouter()
+    const locale: ILocale = router.locale === "en" ? en : ru
 
     const { data: user, error, revalidate } = useSWR('/api/user', () =>
         axios
@@ -26,34 +42,25 @@ export const useAuth = ({ middleware = 'auth', redirectTo = '/' }: IPropsAuth) =
 
     const csrf = () => axios.get('/sanctum/csrf-cookie')
 
-    const register = async ({ setErrors, ...props }: any) => {
+    const register = async (props: IRegister) => {
         await csrf()
-
-        setErrors([])
 
         axios
             .post('/register', props)
             .then(() => revalidate())
             .catch(error => {
-                if (error.response.status !== 422) throw error
-
-                setErrors(Object.values(error.response.data.errors).flat())
+                defaultCatch(error.response, locale);
             })
     }
 
-    const login = async ({ setErrors, setStatus, ...props }: any) => {
+    const login = async (props: ILogin) => {
         await csrf()
-
-        setErrors([])
-        setStatus(null)
 
         axios
             .post('/login', props)
             .then(() => revalidate())
             .catch(error => {
-                if (error.response.status !== 422) throw error
-
-                setErrors(Object.values(error.response.data.errors).flat())
+                defaultCatch(error.response, locale)
             })
     }
 
@@ -99,15 +106,16 @@ export const useAuth = ({ middleware = 'auth', redirectTo = '/' }: IPropsAuth) =
         if (!error) {
             await axios.post('/logout')
 
-            revalidate()
+            await revalidate()
         }
 
-        window.location.pathname = '/login'
+        await router.push('/login')
     }
 
     useEffect(() => {
         if (middleware === 'guest' && user) router.push(redirectTo)
         if (middleware === 'auth' && error) logout()
+        if (middleware === "verified" && user.email_verified_at === null) router.push(redirectTo)
     }, [user, error])
 
     return {
@@ -117,6 +125,6 @@ export const useAuth = ({ middleware = 'auth', redirectTo = '/' }: IPropsAuth) =
         forgotPassword,
         resetPassword,
         resendEmailVerification,
-        logout,
+        logout
     }
 }

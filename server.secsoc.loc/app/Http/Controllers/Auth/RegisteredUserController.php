@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\Support\Facades\App;
-use Symfony\Component\HttpFoundation\Cookie;
 
 class RegisteredUserController extends Controller
 {
@@ -24,7 +23,12 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request)
     {
-        $lang = $_COOKIE['lang'];
+        if (isset($_COOKIE['lang'])) {
+            $lang = $_COOKIE['lang'];
+        } else {
+            $lang = env("DEFAULT_LANG");
+        }
+
         App::setLocale($lang);
 
         $request->validate([
@@ -38,6 +42,9 @@ class RegisteredUserController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
+
+        $user->info_users()->create(); // create empty table
+        $user->settings()->create(); // create empty table
 
         event(new Registered($user));
 
