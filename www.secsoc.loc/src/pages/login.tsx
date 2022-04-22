@@ -1,10 +1,9 @@
-import { useAuth } from '@/hooks/auth'
-import React from 'react'
-import { useRouter } from 'next/router'
+import React from 'react';
+import { useAuth } from '@/hooks/auth';
 import {Button, TextField, Checkbox, FormControlLabel} from "@mui/material";
 import PasswordInput from "@/components/PasswordInput";
-import * as en from "@/locales/en.json"
-import * as ru from "@/locales/ru.json"
+import * as en from "@/locales/en.json";
+import * as ru from "@/locales/ru.json";
 import ILocale from "@/interfaces/locale";
 
 
@@ -14,10 +13,9 @@ const Login = () => {
         redirectTo: '/'
     })
 
-    const router = useRouter()
-    const locale: ILocale = router.locale === "en" ? en : ru
+    const locale: ILocale = ru;
 
-    const submitForm = async (event: React.SyntheticEvent) => {
+    const submitForm = (event: React.SyntheticEvent) => {
         event.preventDefault();
 
         const target = event.target as typeof event.target & {
@@ -32,8 +30,8 @@ const Login = () => {
             remember: target.remember.value
         };
 
-        await login(data)
-    }
+        login(data);
+    };
 
     return (
         <form onSubmit={submitForm} className={'form-control gap-3 d-grid py-3'}>
@@ -58,6 +56,6 @@ const Login = () => {
             </div>
         </form>
     )
-}
+};
 
-export default Login
+export default Login;

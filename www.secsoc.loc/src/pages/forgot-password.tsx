@@ -1,6 +1,9 @@
-import Link from 'next/link'
-import { useAuth } from '@/hooks/auth'
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+import { useAuth } from '@/hooks/auth';
+import {
+    Link
+} from "react-router-dom";
+
 
 const ForgotPassword = () => {
     const { forgotPassword } = useAuth({ middleware: 'guest' })

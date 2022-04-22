@@ -1,6 +1,10 @@
-import Link from 'next/link'
-import { useAuth } from '@/hooks/auth'
-import { useState } from 'react'
+import React from "react";
+import {
+    Link
+} from "react-router-dom";
+import { useAuth } from '@/hooks/auth';
+import { useState } from 'react';
+
 
 const VerifyEmail = () => {
     const { logout, resendEmailVerification } = useAuth({

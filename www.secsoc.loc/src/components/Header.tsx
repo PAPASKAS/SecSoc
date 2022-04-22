@@ -1,5 +1,7 @@
 import React from "react"
-import Link from "next/link"
+import {
+    Link
+} from "react-router-dom";
 import {
     Navbar,
     Container,
@@ -9,39 +11,38 @@ import {
     Button
 } from "@mui/material"
 import LanguageButton from "@/components/LanguageButton"
-import { useRouter } from "next/router"
 import * as en from "@/locales/en.json"
 import * as ru from "@/locales/ru.json"
 import {useAuth} from "@/hooks/auth";
+import ILocale from "@/interfaces/locale";
 
 
 const Header = () => {
-    const router = useRouter();
-    const locale = router.locale === "en" ? en : ru;
+    const locale: ILocale = ru;
     const {user} = useAuth({});
 
     return (
         <Navbar bg="dark" variant={'dark'} expand="lg" className={'mb-4'}>
             <Container>
-                <Link href={"/"} passHref>
+                <Link to={"/"}>
                     <Navbar.Brand>SecSoc</Navbar.Brand>
                 </Link>
                 <Navbar.Toggle />
                 <Navbar.Collapse>
                     <Nav className="me-auto" >
-                        <Link href={"/home"} passHref>
-                            <Nav.Link>Home </Nav.Link>
+                        <Link to={"/home"}>
+                            <Nav.Link>Home</Nav.Link>
                         </Link>
                     </Nav>
                     <Nav className={'align-items-start align-items-lg-center'}>
                         { !user ?
                             <>
-                                <Link href={"/login"} passHref>
+                                <Link to={"/login"}>
                                     <Nav.Link>
                                         <Button variant={'contained'}>{locale.navbar.login}</Button>
                                     </Nav.Link>
                                 </Link>
-                                <Link href={"/register"} passHref>
+                                <Link to={"/register"}>
                                     <Nav.Link>
                                         <Button variant={'contained'}>{locale.navbar.register}</Button>
                                     </Nav.Link>
@@ -50,7 +51,7 @@ const Header = () => {
                         :
                             null
                         }
-                        <LanguageButton locale={locale} router={router} />
+                        {/*<LanguageButton locale={locale} router={router} />*/}
                     </Nav>
                 </Navbar.Collapse>
             </Container>

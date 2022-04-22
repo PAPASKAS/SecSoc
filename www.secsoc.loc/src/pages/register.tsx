@@ -1,14 +1,13 @@
-import React from 'react'
-import noty from "@/lib/noty"
-import { useRouter } from 'next/router'
-import { useAuth } from '@/hooks/auth'
+import React from 'react';
+import noty from "@/lib/noty";
+import { useAuth } from '@/hooks/auth';
 import {
     TextField,
     Button
-} from "@mui/material"
-import PasswordInput from '@/components/PasswordInput'
-import * as en from "@/locales/en.json"
-import * as ru from "@/locales/ru.json"
+} from "@mui/material";
+import PasswordInput from '@/components/PasswordInput';
+import * as en from "@/locales/en.json";
+import * as ru from "@/locales/ru.json";
 import ILocale from "@/interfaces/locale";
 
 
@@ -17,8 +16,7 @@ const Register = () => {
         middleware: 'guest',
     })
 
-    const router = useRouter()
-    const locale: ILocale = router.locale === "en" ? en : ru
+    const locale: ILocale = ru;
 
     const submitForm = (event: React.SyntheticEvent) => {
         event.preventDefault();
@@ -42,7 +40,7 @@ const Register = () => {
 
 
         register(data)
-    }
+    };
 
     return (
         <>
@@ -80,7 +78,7 @@ const Register = () => {
                 </div>
             </form>
         </>
-    )
-}
+    );
+};
 
-export default Register
+export default Register;

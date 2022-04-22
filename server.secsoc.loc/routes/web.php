@@ -16,4 +16,5 @@ use App\Http\Controllers\UsersController;
 
 Route::post('/users/{login}', [UsersController::class, 'show']);
 
+
 require __DIR__ . '/auth.php';

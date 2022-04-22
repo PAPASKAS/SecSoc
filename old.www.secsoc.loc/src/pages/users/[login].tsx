@@ -1,5 +1,5 @@
 import { useAuth } from "@/hooks/auth";
-import {useRouter} from "next/router";
+import {NextRouter, useRouter} from "next/router";
 import Ajax from "@/lib/ajax"
 import * as en from "@/locales/en.json";
 import * as ru from "@/locales/ru.json";
@@ -7,16 +7,19 @@ import ILocale from "@/interfaces/locale";
 import ICurrentUser from "@/interfaces/currentUser";
 
 
-const user = (props: any) => {
+export default function ()  {
     useAuth({
         middleware: "auth",
         redirectTo: "/register"
     })
 
-    const router = useRouter()
+    const router: NextRouter = useRouter()
     const locale: ILocale = router.locale === "en" ? en : ru
+    const { login } = router.query
 
-    const currentUser: ICurrentUser = fetchData("papaska", locale)
+    const currentUser = fetchUser(login as string, locale)
+    console.log(currentUser)
+
 
     return (
         <div>
@@ -26,8 +29,7 @@ const user = (props: any) => {
     )
 }
 
-const fetchData = async (login:string, locale: ILocale) => {
-    return await Ajax.getCurrentUser(login, locale)
-}
 
-export default user;
+const fetchUser = (login: string, locale: ILocale) => {
+    return Ajax.userPage(login, locale);
+}

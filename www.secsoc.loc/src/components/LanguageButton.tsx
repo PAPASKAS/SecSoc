@@ -1,14 +1,15 @@
 import {
     NavDropdown
-} from "react-bootstrap"
-import Link from "next/link"
+} from "react-bootstrap";
+import {
+    Link
+} from "react-router-dom";
 import ILocale from "@/interfaces/locale";
-import {NextRouter} from "next/router";
 
 
 interface IProps {
     locale: ILocale;
-    router: NextRouter;
+    router: any;
 }
 
 
@@ -22,12 +23,12 @@ const LanguageButton = (props: IProps) => {
 
     return (
         <NavDropdown title={locales.navbar.lang} className={'dropstart'}>
-            <Link href={asPath} locale={'ru'} passHref>
-                <NavDropdown.Item onClick={() => changeCookie("ru")}>ru</NavDropdown.Item >
-            </Link>
-            <Link href={asPath} locale={'en'} passHref>
-                <NavDropdown.Item onClick={() => changeCookie("en")}>en</NavDropdown.Item>
-            </Link>
+            {/*<Link to={asPath} locale={'ru'}>*/}
+            {/*    <NavDropdown.Item onClick={() => changeCookie("ru")}>ru</NavDropdown.Item >*/}
+            {/*</Link>*/}
+            {/*<Link to={asPath} locale={'en'}>*/}
+            {/*    <NavDropdown.Item onClick={() => changeCookie("en")}>en</NavDropdown.Item>*/}
+            {/*</Link>*/}
         </NavDropdown >
     )
 };
