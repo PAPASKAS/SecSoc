@@ -1,52 +1,50 @@
-import React from "react";
+import React, { useState } from 'react';
 import {
-    Link
-} from "react-router-dom";
-import { useAuth } from '@/hooks/auth';
-import { useState } from 'react';
+  Link,
+} from 'react-router-dom';
+import useAuth from '@/hooks/auth';
 
+function VerifyEmail() {
+  const { logout, resendEmailVerification } = useAuth({
+    middleware: 'auth',
+  });
 
-const VerifyEmail = () => {
-    const { logout, resendEmailVerification } = useAuth({
-        middleware: 'auth',
-    })
+  const [status, setStatus] = useState(null);
 
-    const [status, setStatus] = useState(null)
+  return (
+    <div>
+      <div>
+        <div className="mb-4 text-sm text-gray-600">
+  Thanks for signing up! Before getting started, could you
+  verify your email address by clicking on the link we just
+  emailed to you? If you did not receive the email, we will
+  gladly send you another.
+        </div>
+        {status === 'verification-link-sent' && (
+          <div className="mb-4 font-medium text-sm text-green-600">
+            A new verification link has been sent to the email address you provided during
+            registration.
+          </div>
+        )}
+        <div className="mt-4 flex items-center justify-between">
+          <button
+            type="button"
+            onClick={() => resendEmailVerification({ setStatus })}
+          >
+            Resend Verification Email
+          </button>
 
-    return (
-        <>
-            <div>
-
-                <div className="mb-4 text-sm text-gray-600">
-                    Thanks for signing up! Before getting started, could you
-                    verify your email address by clicking on the link we just
-                    emailed to you? If you didn't receive the email, we will
-                    gladly send you another.
-                </div>
-
-                {status === 'verification-link-sent' && (
-                    <div className="mb-4 font-medium text-sm text-green-600">
-                        A new verification link has been sent to the email
-                        address you provided during registration.
-                    </div>
-                )}
-
-                <div className="mt-4 flex items-center justify-between">
-                    <button
-                        onClick={() => resendEmailVerification({ setStatus })}>
-                        Resend Verification Email
-                    </button>
-
-                    <button
-                        type="button"
-                        className="underline text-sm text-gray-600 hover:text-gray-900"
-                        onClick={logout}>
-                        Logout
-                    </button>
-                </div>
-            </div>
-        </>
-    )
+          <button
+            type="button"
+            className="underline text-sm text-gray-600 hover:text-gray-900"
+            onClick={logout}
+          >
+            Logout
+          </button>
+        </div>
+      </div>
+    </div>
+  );
 }
 
-export default VerifyEmail
+export default VerifyEmail;

@@ -1,19 +1,16 @@
-import Noty from 'noty'
+import Noty from 'noty';
 
+type MessageType = 'alert' | 'success' | 'warning' | 'error' | 'info' | 'information';
 
-type messageType = "alert" | "success" | "warning" | "error" | "info" | "information";
+const noty = (text: string, type: MessageType, err?: boolean) => {
+  new Noty({
+    text,
+    type,
+    layout: 'bottomRight',
+    theme: 'nest',
+  }).show();
 
-
-const noty = (text: string, type: messageType, err?: boolean) => {
-    new Noty({
-        text,
-        type,
-        layout: "bottomRight",
-        theme: "nest"
-    }).show()
-
-    if (err)
-        throw text
+  if (err) throw Error(text);
 };
 
 export default noty;
